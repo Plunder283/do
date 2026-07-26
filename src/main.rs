@@ -1,6 +1,9 @@
 use std::env;
 use std::process::Command;
 
+mod types;
+mod data;
+
 fn launch_editor(file: &str) {
     let status = Command::new("vim")
             .arg(format!("~/.local/share/task/{file}"))
@@ -16,16 +19,27 @@ fn launch_editor(file: &str) {
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    
-    if args.len() == 1 {
-        launch_editor(todo);
+    let argc = args.len();
+
+    if argc == 1 {
+        launch_editor("todo");
         return;
     }
 
     if args[1] == "note" || args[1] == "draft" {
         launch_editor("draft.txt");
         return;
-    } else if args[1] == "add" {
+    } else if args[1] == "add" || args[1] == "-a" {  
+        // Error Handling
+        if argc <= 2 {
+            println!("Usage: do add [task1] [task2] ...");
+            return;
+        }
 
+        let mut i = 2;
+        while i < argc {
+            // Faire systeme de note
+            i = i + 1;
+        }
     }
 }
