@@ -22,14 +22,14 @@ fn main() {
     let argc = args.len();
 
     if argc == 1 {
-        launch_editor("todo");
+        data::ListTasks();
         return;
     }
 
     if args[1] == "note" || args[1] == "draft" {
         launch_editor("draft.txt");
         return;
-    } else if args[1] == "add" || args[1] == "-a" {  
+    } else if args[1] == "add" || args[1] == "-a" || args[1] == "a" {  
         // Error Handling
         if argc <= 2 {
             println!("Usage: do add [task1] [task2] ...");
@@ -38,7 +38,7 @@ fn main() {
 
         let mut i = 2;
         while i < argc {
-            // Faire systeme de note
+            data::AddTask(args[i].clone()).unwrap();
             i = i + 1;
         }
     }

@@ -1,3 +1,6 @@
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize, PartialEq)]
 pub enum Status {
     Pending,
     InProgress,
@@ -10,7 +13,8 @@ pub struct Group {
     tasks: Vec<Task>
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct Task {
-    name: String,
-    status: String,
+    pub name: String,
+    pub status: Status,
 }
