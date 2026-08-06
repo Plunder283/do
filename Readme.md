@@ -19,3 +19,6 @@ do note
 ```
 
 ## Installation
+```
+./install.sh
+```
