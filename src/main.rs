@@ -28,17 +28,23 @@ fn main() {
 
     if args[1] == "note" || args[1] == "draft" {
         launch_editor("draft.txt");
-        return;
-    } else if args[1] == "add" || args[1] == "-a" || args[1] == "a" {  
+    } else if args[1] == "add" || args[1] == "--add" || args[1] == "-a" || args[1] == "a" {  
         // Error Handling
         if argc <= 2 {
             println!("Usage: do add [task1] [task2] ...");
-            return;
         }
 
         let mut i = 2;
         while i < argc {
             data::AddTask(args[i].clone()).unwrap();
+            i = i + 1;
+        }
+    } else if args[1] == "clean" || args[1] == "--clean" || args[1] == "-c" || args[1] == "c" {
+        data::Clean_tasks();
+    } else {
+        let mut i = 1;
+        while i < argc {
+            data::DoTask(args[i].clone()).unwrap();
             i = i + 1;
         }
     }

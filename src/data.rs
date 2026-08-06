@@ -53,17 +53,17 @@ pub fn AddTask(task_name: String) -> Result<(), String> {
 }
 
 pub fn DoTask(task_name: String) -> Result<(), String> {
-    let task_list: Vec<Task> = ReadData();
-    for mut task in task_list {
+    let mut task_list: Vec<Task> = ReadData();
+    for task in &mut task_list {
         if task.name == task_name {
             task.status = Status::Done;
-            return Ok(());
+            return WriteData(&task_list);
         }
     }
-    return Err(format!("Task: {task_name} does not exist"));
+    Err(format!("Task: {task_name} does not exist"))
 }
 
-pub fn clean_tasks() {
+pub fn Clean_tasks() {
     let mut task_list: Vec<Task> = ReadData();
     task_list.retain(|task| task.status != Status::Done);
     WriteData(&task_list).unwrap();
