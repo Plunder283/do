@@ -47,6 +47,7 @@ pub fn AddTask(task_name: String) -> Result<(), String> {
         name: task_name,
         status: Status::Pending
     };
+    println!("{0} added.", new_task.name);
     task_list.push(new_task);
     WriteData(&task_list).unwrap();
     Ok(())
@@ -57,6 +58,7 @@ pub fn DoTask(task_name: String) -> Result<(), String> {
     for task in &mut task_list {
         if task.name == task_name {
             task.status = Status::Done;
+            println!("{0} done.", task.name);
             return WriteData(&task_list);
         }
     }
@@ -67,15 +69,17 @@ pub fn Clean_tasks() {
     let mut task_list: Vec<Task> = ReadData();
     task_list.retain(|task| task.status != Status::Done);
     WriteData(&task_list).unwrap();
+    println!("All completed tasks have been deleted.");
 }
 
 pub fn ListTasks() {
     let task_list: Vec<Task> = ReadData();
+    println!("Task List :");
     for task in task_list {
         match task.status {
-            Status::Pending    => println!("❌ {0}", task.name),
-            Status::InProgress => println!("⏳ {0}", task.name),
-            Status::Done       => println!("✅ {0}", task.name)
+            Status::Pending    => println!("    [❌] {0}", task.name),
+            Status::InProgress => println!("    [⏳] {0}", task.name),
+            Status::Done       => println!("    [✅] {0}", task.name)
         }
     }
 }

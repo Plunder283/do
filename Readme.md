@@ -1,6 +1,21 @@
-- [ ] Add note system
-- [ ] Add context
+# Do (Still in development)
+A simple command-line planning and note-taking tool to help you manage your ADHD and memory lapses !
 
+## Usage :
 
-Un groupe = un json
+To add some tasks :
+```
+do add <task1> <task2> 
+```
 
+To complete some tasks :
+```
+do <task1> <task2>
+```
+
+To take note in a draft :
+```
+do note
+```
+
+## Installation
